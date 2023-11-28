@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'weather',
 ]
 
@@ -128,3 +128,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+BOT_TOKEN = env('BOT_TOKEN')
+
+YANDEX_GEO_AI_KEY = env('YANDEX_GEO_AI_KEY')
+YANDEX_WEATHER_API_KEY = env('YANDEX_WEATHER_API_KEY')

@@ -3,3 +3,5 @@ django==4.2.7
 djangorestframework==3.14.0
 environs==9.5.0
 redis==5.0.1
+geopy==2.4.1
+httpx-0.25.2
