@@ -1,6 +1,5 @@
 import httpx
-
-API_URL = 'http://127.0.0.1:8000/api/'
+from config.settings import API_URL
 
 
 async def city_weather_request(city):

@@ -1,7 +1,6 @@
 import httpx
 from geopy.geocoders import Yandex
 
-
 from config.settings import YANDEX_GEO_AI_KEY
 from config.settings import YANDEX_WEATHER_API_KEY
 
