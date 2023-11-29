@@ -6,8 +6,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
-from services.yandex import fetch_city_location, fetch_city_weather
 from config.settings import BOT_TOKEN
+from services.weather_api import city_weather_request
 
 
 dp = Dispatcher()
@@ -39,24 +39,22 @@ async def get_weather(message: Message):
     else:
 
         city = message.text
-        location = await fetch_city_location(city)
-        if not location:
-            await message.reply('Город не найден! \nВведите правильное название города')
-            return
+        weather = await city_weather_request(city)
 
-        weather = await fetch_city_weather(location.latitude, location.longitude)
+        if 'error' in weather.keys():
+            await message.reply('Укажите корректное название города')
+        else:
+            await message.reply(
+                text=dedent(
+                    f'''
+                    Город: {weather['city']}
 
-        await message.reply(
-            text=dedent(
-                f'''
-                Город: {location}
-
-                Температура: {weather['temp']} градусов Цельсия
-                Давление: {weather['pressure_mm']} мм рт.ст.
-                Скорость ветра : {weather['wind_speed']} м/с
-                '''
+                    Температура: {weather['temp']} градусов Цельсия
+                    Давление: {weather['pressure_mm']} мм рт.ст.
+                    Скорость ветра : {weather['wind_speed']} м/с
+                    '''
+                )
             )
-        )
 
 
 async def main() -> None:
