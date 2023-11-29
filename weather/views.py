@@ -27,5 +27,5 @@ class WeatherView(APIView):
                 cache.set(cache_key, weather, 30 * 60)
             else:
                 weather['error'] = 'Неверное название города'
-        print(weather)
+
         return Response(weather)
